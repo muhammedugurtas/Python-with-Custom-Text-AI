@@ -5,13 +5,13 @@ def get_knowledge_base(path: str) -> dict:
     with open(path, "r", encoding="utf-8") as file:
         return json.load(file)
 
-def save_knowledge_base(data: str, knowledge_base_file: str):
+def save_knowledge_base(data: dict, knowledge_base_file: str):
     with open(knowledge_base_file, "w", encoding="utf-8") as file:
         json.dump(data, file)
         return True
 
-def get_answer_command(query: str, knowledge_base):
-    matches = get_close_matches(query, [command["command"] for command in knowledge_base["commands"]] , n=1, cutoff=0.6)
+def get_command(query: str, knowledge_base):
+    matches = get_close_matches(query, [command["command"] for command in knowledge_base["commands"]] , n=1, cutoff=0.75)
 
     if matches:
         for command in knowledge_base["commands"]:
@@ -23,19 +23,36 @@ def ai_modification():
     while True:
         knowledge_base = get_knowledge_base("knowledge-data.json")
 
-        query = input("You: ")
+        sure_new_command = input("Are you want add new command? y\\Y or n\\N: ")
 
-        if query != "" and "Ponçik" in query or "ponçik" in query or "Poncik" in query or "poncik" in query:
-            answer = get_answer_command(query, knowledge_base)
-            if answer != False:
-                print("AI: I dont know this command :(\nCan you teach me?")
-                command = input("You: ")
-                answer = input("You: ")
-                command = input("You: ")
+        if (sure_new_command.lower() == "y"):
+            command = input("Command: ")
+            answer = input("Answer: ")
+            command_name = input("Command Name: ")
+
+            find_command = get_command(command, knowledge_base)
+
+            if (find_command == None or find_command == False):
+                sure = input("Are you sure? y\\Y or n\\N: ")
+
+                if (sure.lower() == "y"):
+                    knowledge_base["commands"].append({
+                        "command": command,
+                        "answer": answer,
+                        "command_name": command_name
+                    })
+
+                    save_knowledge_base(knowledge_base, "knowledge-data.json")
+
+                    print("AI: New command added successfuly.")
+                else:
+                    print("AI: You selected NO.")
+
             else:
                 print("AI: I already know this command :)")
+            
         else:
-            print("Please give a command.")
+            break
 
 
 if __name__ == '__main__':

@@ -1,6 +1,8 @@
 import json
 from difflib import get_close_matches
 
+SUFFIX = "Poncik" # Default setting is Poncik
+
 def get_knowledge_base(path: str) -> dict:
     with open(path, "r", encoding="utf-8") as file:
         return json.load(file)
@@ -10,7 +12,7 @@ def save_knowledge_base(data: str, knowledge_base_file: str):
         json.dump(data, file)
         return True
 
-def get_answer_command(query: str, knowledge_base):
+def get_command(query: str, knowledge_base):
     matches = get_close_matches(query, [command["command"] for command in knowledge_base["commands"]] , n=1, cutoff=0.6)
 
     if matches:
@@ -26,10 +28,11 @@ def ai():
 
         query = input("You: ")
 
-        if query != "" and "Ponçik" in query or "ponçik" in query or "Poncik" in query or "poncik" in query:
-            answer = get_answer_command(query, knowledge_base)
-            if answer != False:
-                print("AI: " + answer["answer"])
+        if query != "" and SUFFIX in query or SUFFIX.lower() in query:
+            command = get_command(query, knowledge_base)
+            if command != False and command != None:
+                print("AI: " + command["answer"] + "\n")
+                print("AI: I got \"" + command["command_name"] + "\" command.")
             else:
                 print("AI: I dont know this command :(")
         else:
