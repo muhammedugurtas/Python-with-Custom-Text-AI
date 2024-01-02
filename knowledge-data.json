@@ -1,0 +1,45 @@
+{
+    "commands": [
+        {
+            "command": "Işıkları aç",
+            "answer": "Işıkları açıyorum.",
+            "command_name": "lights_on"
+        },
+        {
+            "command": "Işıkları kapat",
+            "answer": "Işıkları kapatıyorum.",
+            "command_name": "lights_off"
+        },
+        {
+            "command": "Turn on lights",
+            "answer": "I turning on the lights.",
+            "command_name": "lights_on"
+        },
+        {
+            "command": "Turn off lights",
+            "answer": "I turning off the lights.",
+            "command_name": "lights_off"
+        },
+        {
+            "command": "Lights on",
+            "answer": "I turning on the lights.",
+            "command_name": "lights_on"
+        },
+        {
+            "command": "Lights off",
+            "answer": "I turning off the lights.",
+            "command_name": "lights_off"
+        },
+        {
+            "command": "Işıkları açarmısın",
+            "answer": "Işıkları açıyorum.",
+            "command_name": "lights_on"
+        },
+        {
+            "command": "Işıkları kapatırmısın",
+            "answer": "Işıkları kapatıyorum.",
+            "command_name": "lights_off"
+        }
+        
+    ]
+}
