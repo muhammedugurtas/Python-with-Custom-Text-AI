@@ -23,7 +23,7 @@ def ai_modification():
     while True:
         knowledge_base = get_knowledge_base("knowledge-data.json")
 
-        sure_new_command = input("Are you want add new command? y\\Y or n\\N: ")
+        sure_new_command = input("AI: Are you want add new command? y\\Y or n\\N: ")
 
         if (sure_new_command.lower() == "y"):
             command = input("Command: ")
